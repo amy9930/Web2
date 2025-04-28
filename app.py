@@ -12,7 +12,7 @@ def about():
 
 @app.route('/tasks')
 def list_tasks():
-    tarea = "Lavar la ropa"
+    tareas = [lavar la ropa, leer un libro, dormir]
     return render_template('tasks.html', t=tarea)
 
 if __name__ == '__main__':
