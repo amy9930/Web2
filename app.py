@@ -23,5 +23,9 @@ def login():
 def signup():
     return render_template('signup.html')
 
+@app.route('/task/create')
+def create_task():
+    return render_template('create_task.html')
+
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1', port=5001)
