@@ -4,12 +4,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 db = SQLAlchemy()
 
 class usuario(db.Model):
-    __tablename__ = 'usuario'
+    __tablename__ = 'usuarios'
 
-    id = db.colum(db.interger, primary_key=True)
-    nombre = db.column(db.String(200), nullable=False)
-    correo = db.column(db.String(100), unique=True, nullable=False)
-    contrasena_hash = db.column(db.String (256), nulable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(200), nullable=False)
+    correo = db.Column(db.String(100), unique=True, nullable=False)
+    contrasena_hash = db.Column(db.String(256), nullable=False)
 
     tareas = db.relationship('tarea', backref='usuario', lazy=True)
     def colocar_cantraseña(self, contraseña):
@@ -21,9 +21,11 @@ class usuario(db.Model):
 class tarea(db.Model):
     __tablename__ = 'tareas'
 
-    id = db.colum(db.interger, primary_key=True)
-    titulo = db.colum(db.String(200), nullable=False)
-    descripcion = db column(db.txt, nullable=True)
-    fecha_creacion = db.column(db.datetime)
-    prioridad = db.column(db.string(50), nullable=False)
-    usuario_id = db.integer, db. foreign_key
+    id = db.Column(db.Integer, primary_key=True)
+    titulo = db.Column(db.String(200), nullable=False)
+    descripcion = db.Column(db.Text, nullable=True)
+    fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
+    fecha_vencimiento = db.Column(db.DateTime, nullable=False)
+    completada = db.Column(db.Boolean, default=False)
+    prioridad = db.Column(db.String(50), nullable=False)
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=False)
