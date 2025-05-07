@@ -12,10 +12,10 @@ class usuario(db.Model):
     contrasena_hash = db.Column(db.String(256), nullable=False)
 
     tareas = db.relationship('tarea', backref='usuario', lazy=True)
-    def colocar_cantraseña(self, contraseña):
+    def colocar_contrasena(self, contraseña):
         self.contrasena_hash = generate_password_hash(contraseña)
     
-    def verificar_contraseña(self, contraseña):
+    def verificar_contrasena(self, contraseña):
         return check_password_hash(self.contrasena_hash, contraseña)
 
 class tarea(db.Model):
