@@ -21,8 +21,13 @@ def about():
 
 @app.route('/tasks')
 def list_tasks():
-    tareas = ["Lavar la ropa", "Limpiar la casa", "Hacer la compra", "Estudiar para el examen", "Hacer ejercicio", "Leer un libro"]
+    tareas = tarea.query.filter_by(usuario_id=session["usuario_id"]).all()
     return render_template('tasks.html', tareas=tareas)
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('home'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
