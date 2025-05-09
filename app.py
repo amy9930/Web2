@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 from config import Config
 from models import db, usuario, tarea
-
+from datetime import datetime
 app = Flask(__name__)
 #configuraciòn de la aplicaciòn flask (donde se indica la base de datos)
 app.config.from_object(Config)
@@ -60,9 +60,22 @@ def signup():
             return redirect(url_for('login'))  
     return render_template('signup.html')
 
-@app.route('/task/create')
+@app.route('/task/create', methods=['GET', 'POST'])
 def create_task():
+    if request.method == 'POST':
+        titulo = request.form['titulo']
+        descripcion = request.form['descripcion']
+        fecha_vencimiento = datetime.strptime(request.form['fecha'], '%Y-%m-%d')
+        prioridad = request.form['prioridad']
+        try:
+            nueva_tarea = tarea(titulo=titulo, descripcion=descripcion, fecha_vencimiento=fecha_vencimiento, prioridad=prioridad, usuario_id=session['usuario_id'])
+            db.session.add(nueva_tarea)
+            db.session.commit()
+            return redirect(url_for('list_tasks'))
+        except Exception as e:
+            return f"Error al crear la tarea: {e}"
     return render_template('create_task.html')
+
 
 @app.route('/task')
 def task():
