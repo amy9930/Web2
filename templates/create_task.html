@@ -24,11 +24,11 @@
 <form class="row g-3" method="POST" action="{{ url_for('create_task') }}">
     <div class="form-group col-md-6">
         <label for="titulo">Título</label>
-        <input type="text" id="titulo" name"titulo" class="form-control" required autofocus>
+        <input type="text" id="titulo" name="titulo" class="form-control" required autofocus>
     </div>
     <div class="form-group col-md-12">
         <label for="descripcion">Descripción</label>
-        <textarea id="descripcion" name"descripcion" class="form-control"></textarea>
+        <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
     </div>
     <div class="form-group col-md-3">
         <label for="fecha" class="form-label">Fecha de culminación</label>
@@ -38,8 +38,8 @@
         <label for="prioridad" class="form-label">Prioridad</label>
         <select id="prioridad" name="prioridad" class="form-control" required>
             <option value="Baja">Baja</option>
-            <option value="media">Baja</option>
-            <option value="alta">Baja</option>
+            <option value="Media">Media</option>
+            <option value="Alta">Alta</option>
             
         </select>
     </div>
