@@ -26,12 +26,12 @@
                         </spam>
                         <div class="text-end">
                             {% if 'usuario_id' in session %}
-                            {{ session['usuario_nombre'] }}
-                            <a href="{{ url_for('list_tasks') }}" class="btn dtn-info me-2">
-                                 Mis Tareas
+                            {{ session['usuario_nombre'] }}|
+                            <a href="{{ url_for('list_tasks') }}" class="btn btn-info me-2">
+                                Mis Tareas
                             </a>
                             <a href="{{ url_for('logout') }}" class="btn btn-warning me-2">
-                                Cerrar Sesion
+                                Cerrar Sesión
                             </a>
                             {% else %}
                             <a href="{{ url_for('login') }}" class="btn btn-outline-light me-2">
